@@ -1,21 +1,20 @@
 # ExTwitchPomobot
 
-**TODO: Add description**
+The first and only one Twitch Bot that brings the power of the Pomodoro Technique while you are at streaming.
 
-## Installation
+Everything is started because of doing [Live Coding on Twitch](https://github.com/joebew42/twitch/issues/45)
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ex_twitch_pomobot` to your list of dependencies in `mix.exs`:
+# DOING
 
-```elixir
-def deps do
-  [
-    {:ex_twitch_pomobot, "~> 0.1.0"}
-  ]
-end
-```
+- As a streamer I can start a new pomodoro with a task name
+  - the command `!pomo_start [task name]`
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ex_twitch_pomobot](https://hexdocs.pm/ex_twitch_pomobot).
+# TODO
 
+- As a viewer I can see how much time is left before the short break
+  - the command `!pomo` will show the current task name and how much time left
+- As a viewer I can ask a question related to the current pomodoro
+  - the command `!pomo_ask [my question for streamer here ...]` will add a question
+- As soon as the pomodoro is over, all the related questions will appear in the chat
+
+# DONE
