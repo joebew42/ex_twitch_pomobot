@@ -1,21 +1,11 @@
 defmodule Client do
   use WebSockex
 
+  alias ExTwitchPomobot.{CommandParser, Commands}
+
   defmodule Pomodoro do
     def start(task_name) do
       IO.puts("Starting a new pomodoro for task: #{task_name}")
-    end
-  end
-
-  defmodule Commands do
-    defmodule StartPomodoro do
-      defstruct [:user, :task_name]
-    end
-  end
-
-  defmodule CommandParser do
-    def from(_irc_message) do
-      %Commands.StartPomodoro{user: "joebew42", task_name: "something"}
     end
   end
 
