@@ -1,6 +1,25 @@
 defmodule Client do
   use WebSockex
 
+  defmodule Pomodoro do
+    def start(task_name) do
+      IO.puts("Starting a new pomodoro for task: #{task_name}")
+    end
+  end
+
+  defmodule CommandParser do
+    def from(_irc_message) do
+      %{user: "joebew42", name: "pomo_start", text: "something"}
+    end
+  end
+
+  defmodule CommandHandler do
+    def handle(%{name: "pomo_start", user: user, text: text} = command) do
+      IO.puts("Handling command: #{inspect(command)}")
+      Pomodoro.start(text)
+    end
+  end
+
   @bot_password System.get_env("BOT_PASSWORD")
   @bot_name System.get_env("BOT_NAME")
   @bot_channel System.get_env("BOT_CHANNEL")
@@ -18,8 +37,13 @@ defmodule Client do
     WebSockex.send_frame(client, {:text, "PRIVMSG #joebew42 :#{message}"})
   end
 
-  def handle_frame({type, msg}, state) do
-    IO.puts("Received Message - Type: #{inspect(type)} -- Message: #{inspect(msg)}")
+  def handle_frame({type, message}, state) do
+    IO.puts("Received Message - Type: #{inspect(type)} -- Message: #{inspect(message)}")
+
+    command = CommandParser.from(message)
+
+    CommandHandler.handle(command)
+
     {:ok, state}
   end
 end

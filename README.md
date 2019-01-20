@@ -30,7 +30,7 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
 ## DOING
 
 - As a streamer I can start a new pomodoro with a task name
-  - the command `!pomo_start [task name]`
+  - the command should be `!pomo_start [task name]`
 
 ## TODO
 
@@ -39,5 +39,6 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
 - As a viewer I can ask a question related to the current pomodoro
   - the command `!pomo_ask [my question for streamer here ...]` will add a question
 - As soon as the pomodoro is over, all the related questions will appear in the chat
+- [?] Do we need to parse the IRC message? Or we can deal with the command only?
 
 ## DONE
