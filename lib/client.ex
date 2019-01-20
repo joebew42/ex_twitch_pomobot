@@ -1,4 +1,4 @@
-defmodule ExTwitchPomobot.TwitchIRC do
+defmodule Client do
   use WebSockex
 
   @bot_password System.get_env("BOT_PASSWORD")

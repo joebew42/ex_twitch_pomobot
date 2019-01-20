@@ -13,10 +13,10 @@ export BOT_CHANNEL=<YOUR_CHANNEL>
 
 $ iex -S mix
 
-iex(1)> {:ok, pid} = ExTwitchPomobot.TwitchIRC.start
+iex(1)> {:ok, pid} = Client.start
 {:ok, #PID<0.184.0>}
 
-ExTwitchPomobot.TwitchIRC.write(pid, "hello from elixir")
+Client.write(pid, "hello from elixir")
 ```
 
 _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](https://twitchapps.com/tmi/).
