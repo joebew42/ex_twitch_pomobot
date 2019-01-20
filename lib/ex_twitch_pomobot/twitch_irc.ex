@@ -1,11 +1,15 @@
 defmodule ExTwitchPomobot.TwitchIRC do
   use WebSockex
 
+  @bot_password "oauth:<oauth_token_here>"
+  @bot_name "joebew42"
+  @bot_channel "joebew42"
+
   def start() do
     {:ok, client} = WebSockex.start_link("wss://irc-ws.chat.twitch.tv:443", __MODULE__, [])
-    WebSockex.send_frame(client, {:text, "PASS oauth:<oauth_token_here>"})
-    WebSockex.send_frame(client, {:text, "NICK joebew42"})
-    WebSockex.send_frame(client, {:text, "JOIN #joebew42"})
+    WebSockex.send_frame(client, {:text, "PASS #{@bot_password}"})
+    WebSockex.send_frame(client, {:text, "NICK #{@bot_name}"})
+    WebSockex.send_frame(client, {:text, "JOIN ##{@bot_channel}"})
 
     {:ok, client}
   end
