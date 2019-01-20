@@ -7,16 +7,22 @@ defmodule Client do
     end
   end
 
+  defmodule Commands do
+    defmodule StartPomodoro do
+      defstruct [:user, :task_name]
+    end
+  end
+
   defmodule CommandParser do
     def from(_irc_message) do
-      %{user: "joebew42", name: "pomo_start", text: "something"}
+      %Commands.StartPomodoro{user: "joebew42", task_name: "something"}
     end
   end
 
   defmodule CommandHandler do
-    def handle(%{name: "pomo_start", user: user, text: text} = command) do
+    def handle(%Commands.StartPomodoro{} = command) do
       IO.puts("Handling command: #{inspect(command)}")
-      Pomodoro.start(text)
+      Pomodoro.start(command.task_name)
     end
   end
 
