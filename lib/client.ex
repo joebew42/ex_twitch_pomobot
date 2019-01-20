@@ -36,9 +36,12 @@ defmodule Client do
   def handle_frame({type, message}, state) do
     IO.puts("Received Message - Type: #{inspect(type)} -- Message: #{inspect(message)}")
 
-    command = CommandParser.from(message)
-
-    CommandHandler.handle(command)
+    case CommandParser.parse(message) do
+      %Commands.Undefined{} ->
+        nil
+      command ->
+        CommandHandler.handle(command)
+    end
 
     {:ok, state}
   end

@@ -40,5 +40,7 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
   - the command `!pomo_ask [my question for streamer here ...]` will add a question
 - As soon as the pomodoro is over, all the related questions will appear in the chat
 - [?] Do we need to parse the IRC message? Or we can deal with the command only?
+- [?] Should the CommandParser.parse have to return a `Undefined` command where unable to parse?
+  - Should the `Undefined` command be part of `Commands`? I don't think so ...
 
 ## DONE
