@@ -19,7 +19,7 @@ iex(1)> {:ok, pid} = Client.start
 Client.write(pid, "hello from elixir")
 ```
 
-_To generate an oauth token you can use [Twitch Chat OAuth Password Generator](https://twitchapps.com/tmi/).
+_To generate an oauth token you can use [Twitch Chat OAuth Password Generator](https://twitchapps.com/tmi/)_.
 
 # Useful resources
 
