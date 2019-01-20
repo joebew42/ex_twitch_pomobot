@@ -4,9 +4,25 @@ The first and only one Twitch Bot that brings the power of the Pomodoro Techniqu
 
 Everything is started because of doing [Live Coding on Twitch](https://github.com/joebew42/twitch/issues/45)
 
-## Useful resources
+# Run the TwitchBot
 
-- [Twitch Chat OAuth Password Generator](https://twitchapps.com/tmi/) to quickly generate an oauth token
+```
+export BOT_PASSWORD=oauth:<OAUTH_TOKEN_HERE>
+export BOT_NAME=<YOUR_BOT_NAME>
+export BOT_CHANNEL=<YOUR_CHANNEL>
+
+$ iex -S mix
+
+iex(1)> {:ok, pid} = ExTwitchPomobot.TwitchIRC.start
+{:ok, #PID<0.184.0>}
+
+ExTwitchPomobot.TwitchIRC.write(pid, "hello from elixir")
+```
+
+_To generate an oauth token you can use [Twitch Chat OAuth Password Generator](https://twitchapps.com/tmi/).
+
+# Useful resources
+
 - [Chatbots & IRC Guide](https://dev.twitch.tv/docs/irc/guide/)
 
 # Scratchpad

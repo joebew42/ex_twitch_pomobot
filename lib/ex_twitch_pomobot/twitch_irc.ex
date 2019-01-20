@@ -1,9 +1,9 @@
 defmodule ExTwitchPomobot.TwitchIRC do
   use WebSockex
 
-  @bot_password "oauth:<oauth_token_here>"
-  @bot_name "joebew42"
-  @bot_channel "joebew42"
+  @bot_password System.get_env("BOT_PASSWORD")
+  @bot_name System.get_env("BOT_NAME")
+  @bot_channel System.get_env("BOT_CHANNEL")
 
   def start() do
     {:ok, client} = WebSockex.start_link("wss://irc-ws.chat.twitch.tv:443", __MODULE__, [])
@@ -19,7 +19,7 @@ defmodule ExTwitchPomobot.TwitchIRC do
   end
 
   def handle_frame({type, msg}, state) do
-    IO.puts "Received Message - Type: #{inspect type} -- Message: #{inspect msg}"
+    IO.puts("Received Message - Type: #{inspect(type)} -- Message: #{inspect(msg)}")
     {:ok, state}
   end
 end
