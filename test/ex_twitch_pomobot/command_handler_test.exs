@@ -3,7 +3,7 @@ defmodule ExTwitchPomobot.CommandHandlerTest do
 
   import Mox
 
-  alias ExTwitchPomobot.MockTimer
+  alias ExTwitchPomobot.MockTimer, as: Timer
 
   alias ExTwitchPomobot.CommandHandler
   alias ExTwitchPomobot.Commands
@@ -13,12 +13,12 @@ defmodule ExTwitchPomobot.CommandHandlerTest do
   end
 
   test "start a pomodoro with a task name" do
-    expect(MockTimer, :start, fn "A task name" -> :ok end)
+    expect(Timer, :start, fn "A task name" -> :ok end)
 
     command = %Commands.StartPomodoro{task_name: "A task name"}
 
     CommandHandler.handle(command)
 
-    verify!(MockTimer)
+    verify!(Timer)
   end
 end
