@@ -1,20 +1,7 @@
 defmodule Client do
   use WebSockex
 
-  alias ExTwitchPomobot.{CommandParser, Commands}
-
-  defmodule Pomodoro do
-    def start(task_name) do
-      IO.puts("Starting a new pomodoro for task: #{task_name}")
-    end
-  end
-
-  defmodule CommandHandler do
-    def handle(%Commands.StartPomodoro{} = command) do
-      IO.puts("Handling command: #{inspect(command)}")
-      Pomodoro.start(command.task_name)
-    end
-  end
+  alias ExTwitchPomobot.{CommandParser, CommandHandler}
 
   @bot_password System.get_env("BOT_PASSWORD")
   @bot_name System.get_env("BOT_NAME")
@@ -36,12 +23,9 @@ defmodule Client do
   def handle_frame({type, message}, state) do
     IO.puts("Received Message - Type: #{inspect(type)} -- Message: #{inspect(message)}")
 
-    case CommandParser.parse(message) do
-      %Commands.Undefined{} ->
-        nil
-      command ->
-        CommandHandler.handle(command)
-    end
+    message
+    |> CommandParser.parse()
+    |> CommandHandler.handle()
 
     {:ok, state}
   end
