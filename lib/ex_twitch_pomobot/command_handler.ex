@@ -1,10 +1,10 @@
 defmodule ExTwitchPomobot.CommandHandler do
-  alias ExTwitchPomobot.Pomodoro
   alias ExTwitchPomobot.Commands
 
+  @timer Application.get_env(:ex_twitch_pomobot, :timer)
+
   def handle(%Commands.StartPomodoro{} = command) do
-    IO.puts("Handling command: #{inspect(command)}")
-    Pomodoro.start(command.task_name)
+    @timer.start(command.task_name)
   end
 
   def handle(%Commands.Undefined{}), do: nil

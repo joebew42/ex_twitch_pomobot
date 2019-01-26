@@ -7,7 +7,8 @@ defmodule ExTwitchPomobot.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      elixirc_paths: elixirc_paths(Mix.env())
     ]
   end
 
@@ -18,9 +19,13 @@ defmodule ExTwitchPomobot.MixProject do
     ]
   end
 
+  defp elixirc_paths(:test), do: ["test/support", "lib"]
+  defp elixirc_paths(_),     do: ["lib"]
+
   defp deps do
     [
-      {:websockex, "~> 0.4.2"}
+      {:websockex, "~> 0.4.2"},
+      {:mox, "~> 0.4.0", only: :test}
     ]
   end
 end
