@@ -7,7 +7,5 @@ defmodule ExTwitchPomobot.CommandHandler do
     Pomodoro.start(command.task_name)
   end
 
-  def handle(%Commands.Undefined{}) do
-    nil
-  end
+  def handle(%Commands.Undefined{}), do: nil
 end
