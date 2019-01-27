@@ -1,4 +1,4 @@
-defmodule Client do
+defmodule ExTwitchPomobot.IRCTwitchChat do
   use WebSockex
 
   alias ExTwitchPomobot.{CommandParser, CommandHandler}
@@ -8,16 +8,18 @@ defmodule Client do
   @bot_channel System.get_env("BOT_CHANNEL")
 
   def start() do
-    {:ok, client} = WebSockex.start_link("wss://irc-ws.chat.twitch.tv:443", __MODULE__, [])
-    WebSockex.send_frame(client, {:text, "PASS #{@bot_password}"})
-    WebSockex.send_frame(client, {:text, "NICK #{@bot_name}"})
-    WebSockex.send_frame(client, {:text, "JOIN ##{@bot_channel}"})
+    {:ok, _pid} =
+      WebSockex.start_link("wss://irc-ws.chat.twitch.tv:443", __MODULE__, [], name: :chat)
 
-    {:ok, client}
+    WebSockex.send_frame(:chat, {:text, "PASS #{@bot_password}"})
+    WebSockex.send_frame(:chat, {:text, "NICK #{@bot_name}"})
+    WebSockex.send_frame(:chat, {:text, "JOIN ##{@bot_channel}"})
+
+    :ok
   end
 
-  def write(client, message) do
-    WebSockex.send_frame(client, {:text, "PRIVMSG #joebew42 :#{message}"})
+  def write(message) do
+    WebSockex.send_frame(:chat, {:text, "PRIVMSG #joebew42 :#{message}"})
   end
 
   def handle_frame({type, message}, state) do

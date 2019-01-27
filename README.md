@@ -13,7 +13,8 @@ export BOT_CHANNEL=<YOUR_CHANNEL>
 
 $ iex -S mix
 
-iex(1)> {:ok, pid} = Client.start
+iex(2)> alias ExTwitchPomobot.IRCTwitchChat, as: Client
+iex(2)> {:ok, pid} = Client.start
 {:ok, #PID<0.184.0>}
 
 Client.write(pid, "hello from elixir")
@@ -31,6 +32,10 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
 
 - As a streamer I can start a new pomodoro with a task name
   - the command should be `!pomo_start [task name]`
+  - [BUG] At the moment the `CommandHandler.handle()` is blocking. This cause a timeout when trying to write messages to the chat, through the `IRCTwitchChat`
+  - We may have two options:
+    - Make the CommandHandler a GenServer and handle all the commands as cast (non-blocking)
+    - OR, provide to connection to the Twitch Chat: one for reading, and one for writing
 
 ## TODO
 
