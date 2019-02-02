@@ -32,10 +32,6 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
 
 - As a streamer I can start a new pomodoro with a task name
   - the command should be `!pomo_start [task name]`
-  - [BUG] At the moment the `CommandHandler.handle()` is blocking. This cause a timeout when trying to write messages to the chat, through the `IRCTwitchChat`
-  - We may have two options:
-    - Make the CommandHandler a GenServer and handle all the commands as cast (non-blocking)
-    - OR, provide two connection to the Twitch Chat: one for reading, and one for writing
 
 ## TODO
 
@@ -49,3 +45,8 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
   - Should the `Undefined` command be part of `Commands`? I don't think so ...
 
 ## DONE
+
+- [BUG] At the moment the `CommandHandler.handle()` is blocking. This cause a timeout when trying to write messages to the chat, through the `IRCTwitchChat`
+  - We may have two options:
+    - Make the CommandHandler a GenServer and handle all the commands as cast (non-blocking)
+    - OR, provide two connection to the Twitch Chat: one for reading, and one for writing
