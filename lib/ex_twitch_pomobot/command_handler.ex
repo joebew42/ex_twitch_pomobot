@@ -13,15 +13,17 @@ defmodule ExTwitchPomobot.CommandHandler do
     {:ok, args}
   end
 
-  def handle(%Commands.StartPomodoro{} = command) do
+  def handle(command) do
     GenServer.cast(:command_handler, command)
   end
-
-  def handle(%Commands.Undefined{}), do: nil
 
   def handle_cast(%Commands.StartPomodoro{} = command, state) do
     @timer.start(command.task_name)
 
+    {:noreply, state}
+  end
+
+  def handle_cast(_unhandled_command, state) do
     {:noreply, state}
   end
 end

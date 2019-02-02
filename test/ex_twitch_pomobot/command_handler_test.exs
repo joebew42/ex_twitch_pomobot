@@ -15,8 +15,8 @@ defmodule ExTwitchPomobot.CommandHandlerTest do
     :ok
   end
 
-  test "do nothing on undefined command" do
-    assert nil == CommandHandler.handle(%Commands.Undefined{})
+  test "do nothing on unhandled command" do
+    assert :ok == CommandHandler.handle(%Commands.Undefined{})
   end
 
   test "start a pomodoro with a task name" do
