@@ -30,11 +30,11 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
 
 ## DOING
 
-- As a streamer I can start a new pomodoro with a task name
-  - the command should be `!pomo_start [task name]`
+- Start the application automatically. No need to run command in iex -S
 
 ## TODO
 
+- As soon as the pomodoro ends, the chat will be notified
 - As a viewer I can see how much time is left before the short break
   - the command `!pomo` will show the current task name and how much time left
 - As a viewer I can ask a question related to the current pomodoro
@@ -48,6 +48,8 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
 
 ## DONE
 
+- As a streamer I can start a new pomodoro with a task name
+  - the command should be `!pomo_start [task name]`
 - [BUG] At the moment the `CommandHandler.handle()` is blocking. This cause a timeout when trying to write messages to the chat, through the `IRCTwitchChat`
   - We may have two options:
     - Make the CommandHandler a GenServer and handle all the commands as cast (non-blocking)
