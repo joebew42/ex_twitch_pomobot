@@ -1,5 +1,5 @@
 defmodule ExTwitchPomobot.CommandHandlerTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case
 
   import Mox
 
@@ -7,6 +7,13 @@ defmodule ExTwitchPomobot.CommandHandlerTest do
 
   alias ExTwitchPomobot.CommandHandler
   alias ExTwitchPomobot.Commands
+
+  setup :set_mox_global
+  setup do
+    start_supervised CommandHandler
+
+    :ok
+  end
 
   test "do nothing on undefined command" do
     assert nil == CommandHandler.handle(%Commands.Undefined{})
@@ -19,6 +26,19 @@ defmodule ExTwitchPomobot.CommandHandlerTest do
 
     CommandHandler.handle(command)
 
-    verify!(Timer)
+    verify_expectation(Timer)
+  end
+
+  # TODO consider to move this in the test_helper
+  defp verify_expectation(mock, times \\ 3, error \\ nil)
+  defp verify_expectation(_mock, 0, error), do: raise error
+  defp verify_expectation(mock, times, _error) do
+    try do
+      verify!(mock)
+    rescue
+      error ->
+        Process.sleep(100)
+        verify_expectation(mock, times - 1, error)
+    end
   end
 end
