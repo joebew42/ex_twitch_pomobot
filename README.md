@@ -43,6 +43,8 @@ _To generate an oauth token you can use [Twitch Chat OAuth Password Generator](h
 - [?] Do we need to parse the IRC message? Or we can deal with the command only?
 - [?] Should the CommandParser.parse have to return a `Undefined` command where unable to parse?
   - Should the `Undefined` command be part of `Commands`? I don't think so ...
+- [?] Right now we handle the command `StartPomodoro`, but we talk to a `Timer`... Could it be a bit confusing?
+- [?] How can we deal with the fact that the `PomodoroTimer` shares function `start` from `GenServer` and `Timer`?
 
 ## DONE
 
