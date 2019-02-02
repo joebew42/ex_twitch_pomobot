@@ -8,7 +8,8 @@ defmodule ExTwitchPomobot.MixProject do
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      elixirc_paths: elixirc_paths(Mix.env())
+      elixirc_paths: elixirc_paths(Mix.env()),
+      aliases: aliases()
     ]
   end
 
@@ -21,6 +22,12 @@ defmodule ExTwitchPomobot.MixProject do
 
   defp elixirc_paths(:test), do: ["test/support", "lib"]
   defp elixirc_paths(_), do: ["lib"]
+
+  defp aliases() do
+    [
+      test: "test --no-start"
+    ]
+  end
 
   defp deps do
     [

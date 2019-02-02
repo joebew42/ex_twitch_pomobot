@@ -8,12 +8,13 @@ defmodule ExTwitchPomobot.CommandHandlerTest do
   alias ExTwitchPomobot.CommandHandler
   alias ExTwitchPomobot.Commands
 
-  setup :set_mox_global
   setup do
+    start_supervised Mox.Server
     start_supervised CommandHandler
 
     :ok
   end
+  setup :set_mox_global
 
   test "do nothing on unhandled command" do
     assert :ok == CommandHandler.handle(%Commands.Undefined{})

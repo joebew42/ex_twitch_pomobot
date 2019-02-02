@@ -15,15 +15,19 @@ defmodule ExTwitchPomobot.PomodoroTimer do
   end
 
   @impl true
-  def init(args) do
-    {:ok, args}
+  def init(_args) do
+    {:ok, false}
   end
 
   @impl true
-  def handle_call({:start, task_name}, _from, state) do
-    IO.puts("Starting a new pomodoro for task: #{task_name}")
+  def handle_call({:start, _task_name}, _from, true) do
+    {:reply, :ok, true}
+  end
+
+  @impl true
+  def handle_call({:start, task_name}, _from, false) do
     @pomodoro_status.started_on(task_name)
 
-    {:reply, :ok, state}
+    {:reply, :ok, true}
   end
 end

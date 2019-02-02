@@ -6,12 +6,13 @@ defmodule ExTwitchPomobot.PomodoroTimerTest do
   alias ExTwitchPomobot.MockPomodoroStatus, as: PomodoroStatus
   alias ExTwitchPomobot.PomodoroTimer
 
-  setup :set_mox_global
   setup do
+    start_supervised Mox.Server
     start_supervised PomodoroTimer
 
     :ok
   end
+  setup :set_mox_global
 
   describe "when a new pomodoro starts" do
     test "it displays the information about the task" do
@@ -23,13 +24,14 @@ defmodule ExTwitchPomobot.PomodoroTimerTest do
     end
   end
 
-  # describe "when a pomodoro is running" do
-  #   test "a new pomodoro cannot start" do
-  #     expect(PomodoroStatus, :started_on, 0, fn "a task name" -> :ok end)
+  describe "when a pomodoro is running" do
+    test "a new pomodoro cannot be started" do
+      expect(PomodoroStatus, :started_on, 1, fn "a task name" -> :ok end)
 
-  #     :ok = PomodoroTimer.start("a task name")
+      PomodoroTimer.start("a task name")
+      PomodoroTimer.start("a task name")
 
-  #     verify!(PomodoroStatus)
-  #   end
-  # end
+      verify!(PomodoroStatus)
+    end
+  end
 end
